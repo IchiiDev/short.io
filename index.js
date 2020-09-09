@@ -1,4 +1,5 @@
 const request = require("request");
+const { LinksCollector } = require("./classes/LinksCollector");
 
 /**
  * The main class
@@ -15,16 +16,13 @@ class shortio {
     }
 
     // Endpoint: https://api.short.cm/api/links
-    getLinks(options) {
+    getLinks() {
         return new Promise((resolve, reject) => {
-            let links = new Object();
-            if (typeof options != "object") throw new Error(`${options} are not valid options`);
-            if (options.offset == undefined) throw new Error("Invalid request parameters");
-            options.domain_id = this.domain;
-            const data = { method: "GET", url: "https://api.short.cm/api/links", qs: options, headers: { accept: 'application/json', authorization: this.api_key } };
+            const data = { method: "GET", url: `https://api.short.cm/api/links?domain_id=${this.domain}?offset=0`, headers: { accept: 'application/json', authorization: this.api_key } };
             request(data, (error, response, body) => {
                 if (error) throw new Error(error);
-                console.log(body);
+                let links = new LinksCollector(JSON.parse(body));
+                resolve(links);
             });
         });
     }
