@@ -1,0 +1,5 @@
+# Node.JS Packages
+/node_modules
+
+# Dev test file
+test.js

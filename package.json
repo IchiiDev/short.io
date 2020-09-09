@@ -1,0 +1,27 @@
+{
+  "name": "short.io",
+  "version": "1.0.0",
+  "description": "Node wrapper for https://short.io API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IchiiDev/short.io.git"
+  },
+  "keywords": [
+    "short.io",
+    "api",
+    "node"
+  ],
+  "author": "IchiiDev",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/IchiiDev/short.io/issues"
+  },
+  "homepage": "https://github.com/IchiiDev/short.io#readme",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
