@@ -1,8 +1,8 @@
 class LinksCollector {
 
-    constructor(api_response) {
-        this.count = api_response.count;
-        this.links = api_response.links;
+    constructor(links, count) {
+        this.count = count;
+        this.links = links;
     }
 
     get(link_id) {
