@@ -33,6 +33,22 @@ class shortio {
         });
     }
 
+    // Endpoint: GET https://api.short.io/links/expand
+    getLink(path) {
+        return new Promise((resolve, reject) => {
+            const data = {
+                method: 'GET',
+                url: `https://api.short.io/links/expand?domain=${this.domain}&path=${path}`,
+                headers: { accept: 'application/json', authorization: this.api_key }
+            };
+            request(data, (error, response, body) => {
+                if (error) throw error;
+                if (body.error) throw new Error(body.error);
+                resolve(JSON.parse(body));
+            });
+        });
+    }
+
     // Endpoint: POST https://api.short.io/links
     createLink(options = Object()) {
         if (!options.originalURL) throw new Error("option.url is undefined");
