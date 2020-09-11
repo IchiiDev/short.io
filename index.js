@@ -68,9 +68,23 @@ class shortio {
             request(data, (error, response, body) => {
                 if (error) throw error;
                 if (body[0].error) throw new Error(body.error);
-                console.log(body)
                 resolve(new LinksCollector(body, body.length));
             });
+        });
+    }
+
+    // Endpoint: POST https://api.short.cm/links/archive
+    archiveLink(link_id) {
+        const data = {
+            method: 'POST',
+            url: 'https://api.short.cm/links/archive',
+            headers: { 'content-type': 'application/json', authorization: this.api_key },
+            body: { link_id: link_id },
+            json: true
+        };
+        request(data, (error, response, body) => {
+            if (error) throw error;
+            if (body.error) throw new Error(body.error);
         });
     }
 
