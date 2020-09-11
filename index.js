@@ -88,6 +88,19 @@ class shortio {
         });
     }
 
+    // Endpoint: DELETE https://api.short.io/links/:link_id
+    deleteLink(link_id) {
+        const data = {
+            method: 'DELETE',
+            url: `https://api.short.io/links/${link_id}`,
+            headers: { 'content-type': 'application/json', authorization: this.api_key }
+        };
+        request(data, (error, response, body) => {
+            if (error) throw error;
+            if (body.error) throw new Error(body.error);
+        });
+    }
+
 }
 
 module.exports = shortio;
