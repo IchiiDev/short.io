@@ -5,6 +5,7 @@ const { LinksCollector } = require("./classes/LinksCollector");
  * The main class
  * domain: Managed domain on short.io
  * api_key: API Key to access user account
+ * domainId: Managed domain ID 
  */
 
 class shortio {
