@@ -2,6 +2,7 @@
 Easy to use module to interact with the short.io API, shorten links, delete them & more.
 ## How to use ?
 Here's some exemple to kickstart your short.io integration, if you need documentation, refer to the [GitHub Repository's Wiki](https://github.com/IchiiDev/short.io/wiki).
+IchiiDev/short.io is not affiliated to the website and enterprise [short.io](https://short.io)
 
 ### Basics
 If you want to use your short.io account wit this package, here's some data you should get from your account:
