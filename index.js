@@ -1,4 +1,4 @@
-const request = require("request");
+const fetch = require("node-fetch");
 const { LinksCollector } = require("./classes/LinksCollector");
 
 /**
@@ -11,7 +11,7 @@ const { LinksCollector } = require("./classes/LinksCollector");
 class shortio {
 
     constructor(domain = String(), domainId = String(), api_key = String()) {
-        if (domain == "" || api_key == "") throw new Error("Invalid Class Parameters");
+        if (domain == "" || api_key == "" || domainId == "") throw new Error("Invalid Class Parameters");
         this.domain = domain;
         this.api_key = api_key;
         this.domainId = domainId;
@@ -22,15 +22,15 @@ class shortio {
         return new Promise((resolve, reject) => {
             const data = {
                 method: "GET",
-                url: `https://api.short.io/api/links?domain_id=${this.domainId}?offset=0`,
                 headers: { accept: 'application/json', authorization: this.api_key }
             };
-            request(data, (error, response, body) => {
-                if (error) throw error;
-                if (body.error) throw new Error(body.error);
-                let links = new LinksCollector(JSON.parse(body).links, JSON.parse(body).count);
-                resolve(links);
-            });
+            fetch(`https://api.short.io/api/links?domain_id=${this.domainId}?offset=0`, data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error) reject("Error: " + json.error);
+                    let links = new LinksCollector(json.links, json.count);
+                    resolve(links);
+                });
         });
     }
 
@@ -39,14 +39,14 @@ class shortio {
         return new Promise((resolve, reject) => {
             const data = {
                 method: 'GET',
-                url: `https://api.short.io/links/expand?domain=${this.domain}&path=${path}`,
                 headers: { accept: 'application/json', authorization: this.api_key }
             };
-            request(data, (error, response, body) => {
-                if (error) throw error;
-                if (body.error) throw new Error(body.error);
-                resolve(JSON.parse(body));
-            });
+            fetch(`https://api.short.io/links/expand?domain=${this.domain}&path=${path}`, data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error) reject("Error: " + json.error);
+                    resolve(json);
+                });
         });
     }
 
@@ -57,16 +57,16 @@ class shortio {
         return new Promise((resolve, reject) => {
             const data = {
                 method: "POST",
-                url: "https://api.short.io/links",
-                headers: { accept: 'application/json', 'content-type': 'application/json', authorization: this.api_key },
-                body: options,
+                headers: { accept: 'application/json', 'content-type': "application/json", authorization: this.api_key },
+                body: JSON.stringify(options),
                 json: true
             };
-            request(data, (error, response, body) => {
-                if (error) throw error;
-                if (body.error) throw new Error(body.error);
-                resolve(body);
-            });
+            fetch("https://api.short.io/links", data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error) reject("Error: " + json.error);
+                    resolve(json);
+                });
         });
     }
 
@@ -78,43 +78,50 @@ class shortio {
             const data = {
                 method: "POST",
                 url: "https://api.short.io/links/bulk",
-                headers: { accept: 'application/json', 'content-type': 'application/json', authorization: this.api_key },
-                body: { domain: this.domain, links: links },
+                headers: { accept: 'application/json', 'content-type': "application/json", authorization: this.api_key },
+                body: JSON.stringify({ domain: this.domain, links: links }),
                 json: true
             };
-            request(data, (error, response, body) => {
-                if (error) throw error;
-                if (body[0].error) throw new Error(body.error);
-                resolve(new LinksCollector(body, body.length));
-            });
+            fetch("https://api.short.io/links/bulk", data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error != undefined) reject("Error: " + json.error);
+                    resolve(new LinksCollector(json, json.length));
+                });
         });
     }
 
     // Endpoint: POST https://api.short.cm/links/archive
     archiveLink(link_id) {
-        const data = {
-            method: 'POST',
-            url: 'https://api.short.cm/links/archive',
-            headers: { 'content-type': 'application/json', authorization: this.api_key },
-            body: { link_id: link_id },
-            json: true
-        };
-        request(data, (error, response, body) => {
-            if (error) throw error;
-            if (body.error) throw new Error(body.error);
+        return new Promise((resolve, reject) => {
+            const data = {
+                method: 'POST',
+                headers: { 'content-type': "application/json", authorization: this.api_key },
+                body: JSON.stringify({ link_id: link_id }),
+                json: true
+            };
+            fetch("https://api.short.cm/links/archive", data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error) reject(json.error);
+                    resolve({ action: "archive", result: true });
+                });
         });
     }
 
     // Endpoint: DELETE https://api.short.io/links/:link_id
     deleteLink(link_id) {
-        const data = {
-            method: 'DELETE',
-            url: `https://api.short.io/links/${link_id}`,
-            headers: { 'content-type': 'application/json', authorization: this.api_key }
-        };
-        request(data, (error, response, body) => {
-            if (error) throw error;
-            if (body.error) throw new Error(body.error);
+        return new Promise((resolve, reject) => {
+            const data = {
+                method: 'DELETE',
+                headers: { 'content-type': "application/json", authorization: this.api_key }
+            };
+            fetch(`https://api.short.io/links/${link_id}`, data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error) reject(json.error);
+                    resolve({ action: "delete", result: true });
+                });
         });
     }
 
