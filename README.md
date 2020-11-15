@@ -50,19 +50,32 @@ short.createLink({ originalURL: "https://discord.gg/fr" }).then(link => {
 **More options available on the [package's wiki page](https://github.com/IchiiDev/short.io/wiki)*
 ### Deletes a link from your shortner domain
 ```js
-const shortio = require("./index.js");
+const shortio = require("short.io");
 
 // Create your short.io API Wrapper Instance
 const short = new shortio("short.domain.com", 00000, "ZdegKTLwycVBilTxW77hY8Zq4utAn7Xk");
 
 // This deletes a link, the 00000 is the link ID.
-short.deleteLink(00000);
+short.deleteLink(00000) // Delete the link
+    .then(result => console.log(result)) // Display the result for debug
+    .catch(e => console.log(e)); // Catch error if one occures
 ```
 ## How to contribute ?
 Feel free to fork my work and propose changes. If you have any issues with my work, please [open an Issue](https://github.com/IchiiDev/short.io/issues).
 
 ## Contributors
-- [@IchiiDev](https://github.com/IchiiDev): `ichii@hypesquad.events` (Contact E-Mail).
+- [@IchiiDev](https://github.com/IchiiDev): `ichii@discord.fr` (Contact E-Mail).
+
+
+## What's new ?
+### `v1.1.O`: Security update
+- Changed request dependency package from [`request`](https://npmjs.com/package/request) to [`node-fetch`](https://npmjs.com/package/node-fetch) (`request` was deprecated).
+- Added promises to the `deleteLink()` and `archiveLink()` function.
+
+## What's coming ?
+- [ ] New API endpoints handling and functions
+- [ ] Add more classes to improve package ergonomics 
+- [ ] Improve bulk functions
 
 <br/><br/>
 <p align="center"><strong><i>IchiiDev/short.io is not affiliated to the website and enterprise <a href="" target="_blank">short.io</a>.</i></strong></p>
