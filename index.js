@@ -1,30 +1,35 @@
 const fetch = require("node-fetch");
 const { LinksCollector } = require("./classes/LinksCollector");
 
-/**
- * The main class
- * domain: Managed domain on short.io
- * api_key: API Key to access user account
- * domainId: Managed domain ID 
- */
-
 class shortio {
 
-    constructor(domain = String(), domainId = String(), api_key = String()) {
-        if (domain == "" || api_key == "" || domainId == "") throw new Error("Invalid Class Parameters");
+    /**
+     * This is the main class of the package, it holds every functions.
+     * @param {String} domain [required] Managed domain on short.io
+     * @param {number} domainId [required] API Key to access user account
+     * @param {String} api_key [required] Managed domain ID
+     */
+    constructor(domain = "", domainId = 0, api_key = "") {
+        if (domain == "" || api_key == "" || domainId == 0) throw new Error("Invalid Class Parameters");
         this.domain = domain;
         this.api_key = api_key;
         this.domainId = domainId;
     }
 
-    // Endpoint: GET https://api.short.io/api/links
-    getLinks() {
+    /** 
+     * This functions gets a list of 150 (API Max) links from a single domain. Endpoint: GET https://api.short.io/api/links
+     * @param {number} limit Number of links returned by the API search. (Max 150)
+     * @param {String} tag Tag to filter in the links list
+     * @param {number} offset Link offset (Default: 0) 
+     * @returns {Promise<LinksCollector>} Links collection object returned by the API
+     */
+    getLinks(limit = 150, tag = "", offset = 0) {
         return new Promise((resolve, reject) => {
             const data = {
                 method: "GET",
                 headers: { accept: 'application/json', authorization: this.api_key }
             };
-            fetch(`https://api.short.io/api/links?domain_id=${this.domainId}?offset=0`, data)
+            fetch(`https://api.short.io/api/links?domain_id=${this.domainId}&offset=${offset}&limit=${limit}${(tag != "") ? "&tag=" + tag : ""}`, data)
                 .then(response => response.json())
                 .then(json => {
                     if (json.error) reject("Error: " + json.error);
@@ -35,7 +40,13 @@ class shortio {
     }
 
     // Endpoint: GET https://api.short.io/links/expand
-    getLink(path) {
+    /**
+     * This functions gets a link object (filtered by the link path). Endpoint: GET https://api.short.io/links/expand
+     * @param {String} path [required] Link's path
+     * @returns {Object} Link JSON Object returned by the API
+     */
+    getLink(path = "") {
+        if (path == "") throw new Error("path is undefined")
         return new Promise((resolve, reject) => {
             const data = {
                 method: 'GET',
