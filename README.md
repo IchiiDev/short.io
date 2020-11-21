@@ -73,7 +73,7 @@ Feel free to fork my work and propose changes. If you have any issues with my wo
 - Changed request dependency package from [`request`](https://npmjs.com/package/request) to [`node-fetch`](https://npmjs.com/package/node-fetch) (`request` was deprecated).
 - Added promises to the `deleteLink()` and `archiveLink()` function.
 ### `v1.1.1`: Documentation Update
-- Fixed the `listLinks()` function, added more parameters like `offset`, `tag` and `limit`.
+- Fixed the `getLinks()` function, added more parameters like `offset`, `tag` and `limit`.
 - Added more documentation to the code
 ## What's coming ?
 - [ ] New API endpoints handling and functions
