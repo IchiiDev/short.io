@@ -5,7 +5,7 @@ Here's some exemple to kickstart your short.io integration, if you need document
 IchiiDev/short.io is not affiliated to the website and enterprise [short.io](https://short.io)
 
 ### Basics
-If you want to use your short.io account wit this package, here's some data you should get from your account:
+If you want to use your short.io account with this package, here's some data you should get from your account:
 
 - *domain*: The full domain redirected on the short.io service, exemple: short.domain.com.
 - *domainId*: The ID of the managed domain, you can get it in the URL of the links panel, exemple: https://app.short.io/users/dashboard/**00000**/links < 00000.
@@ -49,7 +49,7 @@ short.createLink({ originalURL: "https://discord.gg/fr" }).then(link => {
 });
 ```
 **More options available on the [package's wiki page](https://github.com/IchiiDev/short.io/wiki)*
-### Deletes a link from your shortner domain
+### Delete a link from your shortner domain
 ```js
 const shortio = require("short.io");
 
@@ -72,7 +72,9 @@ Feel free to fork my work and propose changes. If you have any issues with my wo
 ### `v1.1.O`: Security update
 - Changed request dependency package from [`request`](https://npmjs.com/package/request) to [`node-fetch`](https://npmjs.com/package/node-fetch) (`request` was deprecated).
 - Added promises to the `deleteLink()` and `archiveLink()` function.
-
+### `v1.1.1`: Documentation Update
+- Fixed the `getLinks()` function, added more parameters like `offset`, `tag` and `limit`.
+- Added more documentation to the code
 ## What's coming ?
 - [ ] New API endpoints handling and functions
 - [ ] Add more classes to improve package ergonomics 
