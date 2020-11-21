@@ -2,6 +2,7 @@
 Easy to use module, made to interact with the short.io API, shorten links, delete them & more.
 
 [![DeepScan grade](https://deepscan.io/api/teams/10968/projects/14758/branches/281944/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10968&pid=14758&bid=281944)
+[![DeepSource](https://deepsource.io/gh/IchiiDev/short.io.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/IchiiDev/short.io/?ref=repository-badge)
 
 ## How to use ?
 Here's some exemple to kickstart your short.io integration, if you need documentation, refer to the [GitHub Repository's Wiki](https://github.com/IchiiDev/short.io/wiki).
