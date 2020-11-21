@@ -39,11 +39,10 @@ class shortio {
         });
     }
 
-    // Endpoint: GET https://api.short.io/links/expand
     /**
-     * This functions gets a link object (filtered by the link path). Endpoint: GET https://api.short.io/links/expand
+     * This functions gets a link object from the specified domain (filtered by the link path). Endpoint: GET https://api.short.io/links/expand
      * @param {String} path [required] Link's path
-     * @returns {Object} Link JSON Object returned by the API
+     * @returns {Promise<Object>} Link JSON Object returned by the API
      */
     getLink(path = "") {
         if (path == "") throw new Error("path is undefined")
@@ -61,9 +60,13 @@ class shortio {
         });
     }
 
-    // Endpoint: POST https://api.short.io/links
+    /**
+     * This functions create a link on the specified domain and returns a link object. Endpoint: POST https://api.short.io/links
+     * @param {Object} options [required] The link object to create on the specified domain. option.originalURL is mendatory.
+     * @returns {Promise<Object>} Created Link's JSON object returned by the API
+     */
     createLink(options = Object()) {
-        if (!options.originalURL) throw new Error("option.url is undefined");
+        if (!options.originalURL) throw new Error("option.originalURL is undefined");
         options.domain = this.domain;
         return new Promise((resolve, reject) => {
             const data = {
@@ -81,14 +84,17 @@ class shortio {
         });
     }
 
-    // Endpoint: POST https://api.short.io/links/bulk/
+    /**
+     * This function create up to 1000 different links and returns a LinksCollector Object. Endpoint: POST https://api.short.io/links/bulk
+     * @param {Object[]} links [required] Array of Links Objects. In each Object, the Object.originalURL must be defined. 
+     * @returns {Promise<LinksCollector>} LinksCollector Object returned by the API call.
+     */
     createLinkBulk(links) {
         if (links.length < 2) throw new Error("Cannot send less than two links, please use the createLink method");
         if (links.length > 1000) throw new Error("Cannot send more than one thousand links, please split your link array");
         return new Promise((resolve, reject) => {
             const data = {
                 method: "POST",
-                url: "https://api.short.io/links/bulk",
                 headers: { accept: 'application/json', 'content-type': "application/json", authorization: this.api_key },
                 body: JSON.stringify({ domain: this.domain, links: links }),
                 json: true
@@ -102,7 +108,11 @@ class shortio {
         });
     }
 
-    // Endpoint: POST https://api.short.cm/links/archive
+    /**
+     * This functions archive a link from the specified domain. Endpoint: POST https://api.short.cm/links/archive
+     * @param {number} link_id The ID of the link you want to archive.
+     * @returns {Promise<Object>} Request response object into a promise.
+     */
     archiveLink(link_id) {
         return new Promise((resolve, reject) => {
             const data = {
@@ -120,7 +130,11 @@ class shortio {
         });
     }
 
-    // Endpoint: DELETE https://api.short.io/links/:link_id
+    /**
+     * This functions deletes a link from the specified domain. Endpoint: DELETE https://api.short.cm/links/:link_id
+     * @param {number} link_id The ID of the link you want to delete.
+     * @returns {Promise<Object>} Request response object into a promise.
+     */
     deleteLink(link_id) {
         return new Promise((resolve, reject) => {
             const data = {
