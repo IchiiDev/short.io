@@ -1,8 +1,12 @@
 # short.io (NodeJS Module)
-Easy to use module to interact with the short.io API, shorten links, delete them & more.
+Easy to use module, made to interact with the short.io API, shorten links, delete them & more.
+
+[![DeepScan grade](https://deepscan.io/api/teams/10968/projects/14758/branches/281944/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10968&pid=14758&bid=281944)
+
 ## How to use ?
 Here's some exemple to kickstart your short.io integration, if you need documentation, refer to the [GitHub Repository's Wiki](https://github.com/IchiiDev/short.io/wiki).
-IchiiDev/short.io is not affiliated to the website and enterprise [short.io](https://short.io)
+
+**IchiiDev/short.io is not affiliated to the website and enterprise [short.io](https://short.io)**
 
 ### Basics
 If you want to use your short.io account with this package, here's some data you should get from your account:
