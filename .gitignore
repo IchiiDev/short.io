@@ -3,3 +3,6 @@
 
 # Dev test file
 test.js
+
+# Node.JS Package Lock File
+package-lock.json
