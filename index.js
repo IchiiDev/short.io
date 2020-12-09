@@ -112,6 +112,7 @@ class shortio {
      * This functions updates a link from the specified domain to change it's params. Endpoint: POST https://api.short.io/links/:link_id
      * @param {number} id This is the ID of the link you want to update.
      * @param {Object} linkObject This is the new link object of the updated link.
+     * @returns {Promise<Object>} Updated link's object returned by the API.
      */
     updateLink(id, linkObject) {
         if (!linkObject.originalURL) throw new Error("originalURL is not defined");
