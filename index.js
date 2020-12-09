@@ -61,6 +61,17 @@ class shortio {
     }
 
     /**
+     * This function gets a link by searching by it's originalURL. Endpoint: GET https://api.short.io/links/by-original-url
+     * @param {string} originalURL [required] The originalURL of the queried link
+     * @returns {Promise<Object>} The link object behind the queried originalURL
+     */
+    getByOriginalURL(originalURL) {
+        return new Promise((resolve, reject) => {
+
+        });
+    }
+
+    /**
      * This functions create a link on the specified domain and returns a link object. Endpoint: POST https://api.short.io/links
      * @param {Object} options [required] The link object to create on the specified domain. option.originalURL is mendatory.
      * @returns {Promise<Object>} Created Link's JSON object returned by the API
