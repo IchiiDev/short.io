@@ -115,6 +115,21 @@ class shortio {
      */
     updateLink(id, linkObject) {
         if (!linkObject.originalURL) throw new Errror("originalURL is not defined");
+        linkObject.domain = this.domain;
+        return new Promise((resolve, reject) => {
+            const data = {
+                method: "POST",
+                headers: { accept: 'application/json', 'content-type': "application/json", authorization: this.api_key },
+                body: JSON.stringify(linkObject),
+                json: true
+            };
+            fetch(`https://api.short.cm/links/${id}`, data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error != undefined) reject("Error: " + json.error);
+                    resolve(json);
+                });
+        });
     }
 
     /**
