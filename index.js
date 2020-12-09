@@ -17,7 +17,7 @@ class shortio {
     }
 
     /** 
-     * This functions gets a list of 150 (API Max) links from a single domain. Endpoint: GET https://api.short.io/api/links
+     * This function gets a list of 150 (API Max) links from a single domain. Endpoint: GET https://api.short.io/api/links
      * @param {number} limit Number of links returned by the API search. (Max 150)
      * @param {String} tag Tag to filter in the links list
      * @param {number} offset Link offset (Default: 0) 
@@ -40,7 +40,7 @@ class shortio {
     }
 
     /**
-     * This functions gets a link object from the specified domain (filtered by the link path). Endpoint: GET https://api.short.io/links/expand
+     * This function gets a link object from the specified domain (filtered by the link path). Endpoint: GET https://api.short.io/links/expand
      * @param {String} path [required] Link's path
      * @returns {Promise<Object>} Link JSON Object returned by the API
      */
@@ -72,7 +72,7 @@ class shortio {
     }
 
     /**
-     * This functions create a link on the specified domain and returns a link object. Endpoint: POST https://api.short.io/links
+     * This function create a link on the specified domain and returns a link object. Endpoint: POST https://api.short.io/links
      * @param {Object} options [required] The link object to create on the specified domain. option.originalURL is mendatory.
      * @returns {Promise<Object>} Created Link's JSON object returned by the API
      */
@@ -120,7 +120,7 @@ class shortio {
     }
 
     /**
-     * This functions updates a link from the specified domain to change it's params. Endpoint: POST https://api.short.io/links/:link_id
+     * This function updates a link from the specified domain to change it's params. Endpoint: POST https://api.short.io/links/:link_id
      * @param {number} id This is the ID of the link you want to update.
      * @param {Object} linkObject This is the new link object of the updated link.
      * @returns {Promise<Object>} Updated link's object returned by the API.
@@ -145,7 +145,7 @@ class shortio {
     }
 
     /**
-     * This functions archive a link from the specified domain. Endpoint: POST https://api.short.cm/links/archive
+     * This function archive a link from the specified domain. Endpoint: POST https://api.short.cm/links/archive
      * @param {number} link_id The ID of the link you want to archive.
      * @returns {Promise<Object>} Request response object into a promise.
      */
@@ -167,7 +167,7 @@ class shortio {
     }
 
     /**
-     * This functions deletes a link from the specified domain. Endpoint: DELETE https://api.short.cm/links/:link_id
+     * This function deletes a link from the specified domain. Endpoint: DELETE https://api.short.cm/links/:link_id
      * @param {number} link_id The ID of the link you want to delete.
      * @returns {Promise<Object>} Request response object into a promise.
      */
