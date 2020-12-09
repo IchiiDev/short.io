@@ -44,7 +44,7 @@ class shortio {
      * @param {String} path [required] Link's path
      * @returns {Promise<Object>} Link JSON Object returned by the API
      */
-    getLink(path = "") {
+    getLink(path) {
         if (path == "") throw new Error("path is undefined")
         return new Promise((resolve, reject) => {
             const data = {
@@ -76,7 +76,7 @@ class shortio {
      * @param {Object} options [required] The link object to create on the specified domain. option.originalURL is mendatory.
      * @returns {Promise<Object>} Created Link's JSON object returned by the API
      */
-    createLink(options = Object()) {
+    createLink(options) {
         if (!options.originalURL) throw new Error("option.originalURL is undefined");
         options.domain = this.domain;
         return new Promise((resolve, reject) => {
