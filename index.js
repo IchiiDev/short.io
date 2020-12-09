@@ -68,12 +68,10 @@ class shortio {
     getByOriginalURL(originalURL) {
         return new Promise((resolve, reject) => {
             const data = {
-                method: "POST",
+                method: "GET",
                 headers: { accept: 'application/json', 'content-type': "application/json", authorization: this.api_key },
-                body: JSON.stringify({ domain: this.domain, originalURL: originalURL }),
-                json: true
             };
-            fetch("https://api.short.io/links/by-original-url", data)
+            fetch(`https://api.short.io/links/by-original-url?domain=${this.domain}&originalURL=${originalURL}`, data)
                 .then(response => response.json())
                 .then(json => {
                     if (json.error != undefined) reject("Error: " + json.error);
