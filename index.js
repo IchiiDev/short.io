@@ -114,7 +114,7 @@ class shortio {
      * @param {Object} linkObject This is the new link object of the updated link.
      */
     updateLink(id, linkObject) {
-        if (!linkObject.originalURL) throw new Errror("originalURL is not defined");
+        if (!linkObject.originalURL) throw new Error("originalURL is not defined");
         linkObject.domain = this.domain;
         return new Promise((resolve, reject) => {
             const data = {
