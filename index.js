@@ -17,7 +17,7 @@ class shortio {
     }
 
     /** 
-     * This functions gets a list of 150 (API Max) links from a single domain. Endpoint: GET https://api.short.io/api/links
+     * This function gets a list of 150 (API Max) links from a single domain. Endpoint: GET https://api.short.io/api/links
      * @param {number} limit Number of links returned by the API search. (Max 150)
      * @param {String} tag Tag to filter in the links list
      * @param {number} offset Link offset (Default: 0) 
@@ -40,11 +40,11 @@ class shortio {
     }
 
     /**
-     * This functions gets a link object from the specified domain (filtered by the link path). Endpoint: GET https://api.short.io/links/expand
+     * This function gets a link object from the specified domain (filtered by the link path). Endpoint: GET https://api.short.io/links/expand
      * @param {String} path [required] Link's path
      * @returns {Promise<Object>} Link JSON Object returned by the API
      */
-    getLink(path = "") {
+    getLink(path) {
         if (path == "") throw new Error("path is undefined")
         return new Promise((resolve, reject) => {
             const data = {
@@ -61,11 +61,31 @@ class shortio {
     }
 
     /**
-     * This functions create a link on the specified domain and returns a link object. Endpoint: POST https://api.short.io/links
+     * This function gets a link by searching by it's originalURL. Endpoint: GET https://api.short.io/links/by-original-url
+     * @param {string} originalURL [required] The originalURL of the queried link
+     * @returns {Promise<Object>} The link object behind the queried originalURL
+     */
+    getByOriginalURL(originalURL) {
+        return new Promise((resolve, reject) => {
+            const data = {
+                method: "GET",
+                headers: { accept: 'application/json', 'content-type': "application/json", authorization: this.api_key },
+            };
+            fetch(`https://api.short.io/links/by-original-url?domain=${this.domain}&originalURL=${originalURL}`, data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error != undefined) reject("Error: " + json.error);
+                    resolve(json);
+                });
+        });
+    }
+
+    /**
+     * This function create a link on the specified domain and returns a link object. Endpoint: POST https://api.short.io/links
      * @param {Object} options [required] The link object to create on the specified domain. option.originalURL is mendatory.
      * @returns {Promise<Object>} Created Link's JSON object returned by the API
      */
-    createLink(options = Object()) {
+    createLink(options) {
         if (!options.originalURL) throw new Error("option.originalURL is undefined");
         options.domain = this.domain;
         return new Promise((resolve, reject) => {
@@ -109,7 +129,32 @@ class shortio {
     }
 
     /**
-     * This functions archive a link from the specified domain. Endpoint: POST https://api.short.cm/links/archive
+     * This function updates a link from the specified domain to change it's params. Endpoint: POST https://api.short.io/links/:link_id
+     * @param {number} id This is the ID of the link you want to update.
+     * @param {Object} linkObject This is the new link object of the updated link.
+     * @returns {Promise<Object>} Updated link's object returned by the API.
+     */
+    updateLink(id, linkObject) {
+        if (!linkObject.originalURL) throw new Error("originalURL is not defined");
+        linkObject.domain = this.domain;
+        return new Promise((resolve, reject) => {
+            const data = {
+                method: "POST",
+                headers: { accept: 'application/json', 'content-type': "application/json", authorization: this.api_key },
+                body: JSON.stringify(linkObject),
+                json: true
+            };
+            fetch(`https://api.short.cm/links/${id}`, data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error != undefined) reject("Error: " + json.error);
+                    resolve(json);
+                });
+        });
+    }
+
+    /**
+     * This function archive a link from the specified domain. Endpoint: POST https://api.short.cm/links/archive
      * @param {number} link_id The ID of the link you want to archive.
      * @returns {Promise<Object>} Request response object into a promise.
      */
@@ -131,7 +176,7 @@ class shortio {
     }
 
     /**
-     * This functions deletes a link from the specified domain. Endpoint: DELETE https://api.short.cm/links/:link_id
+     * This function deletes a link from the specified domain. Endpoint: DELETE https://api.short.cm/links/:link_id
      * @param {number} link_id The ID of the link you want to delete.
      * @returns {Promise<Object>} Request response object into a promise.
      */

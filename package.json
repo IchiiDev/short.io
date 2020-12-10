@@ -1,6 +1,6 @@
 {
   "name": "short.io",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Node wrapper for https://short.io API",
   "main": "index.js",
   "scripts": {
