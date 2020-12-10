@@ -80,10 +80,15 @@ Feel free to fork my work and propose changes. If you have any issues with my wo
 ### `v1.1.1`: Documentation Update
 - Fixed the `getLinks()` function, added more parameters like `offset`, `tag` and `limit`.
 - Added more documentation to the code
+### `v1.2.0`: Link Management Update
+- Added the `updateLink()` function to permit link edition
+- Added the `getByOriginalURL()` function to get a link object by querying it's originalURL.
+- Removed useless functions parameters
+- Corrected JS Doc errors
 ## What's coming ?
-- [ ] New API endpoints handling and functions
+- [x] New API endpoints handling and functions
 - [ ] Add more classes to improve package ergonomics 
-- [ ] Improve bulk functions
+- [x] Improve bulk functions
 
 <br/><br/>
 <p align="center"><strong><i>IchiiDev/short.io is not affiliated to the website and enterprise <a href="" target="_blank">short.io</a>.</i></strong></p>
