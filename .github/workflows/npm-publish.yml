@@ -1,4 +1,8 @@
-on: push
+on: 
+  push: 
+    branch:
+      - master
+      
 name: NPM Publish
 
 jobs:
