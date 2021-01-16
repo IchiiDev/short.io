@@ -195,6 +195,28 @@ class shortio {
         });
     }
 
+    /**
+     * This functions calls the registered domain's stats. GET https://api-v2.short.cm/statistics/domain/:domainId
+     * @param {string} period The observed period for the stats.
+     * @param {number} tzOffset The difference between your timezone & the GMT timezone. 
+     * @returns {Object} The selected domain's stats returned by the API.
+     */
+    getDomainStats(period = "", tzOffset = 0) {
+        if (["today", "yesterday", "week", "month", "lastmonth", "last7", "last30", "total"].indexOf(period) < 0) throw new Error("The period is either invalid or undefined");
+        return new Promise((resolve, reject) => {
+            const data = {
+                method: "GET",
+                headers: { 'content-type': "application/json", authorization: this.api_key }
+            }
+            fetch(`https://api-v2.short.cm/statistics/domain/${this.domainId}?period=${period}&tzOffset=${tzOffset}`, data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error) reject(json.error);
+                    resolve(json);
+                });
+        });
+    }
+
 }
 
 module.exports = shortio;
