@@ -216,6 +216,11 @@ class shortio {
         });
     }
 
+    /**
+     * This function gets the clicks stats for the requested IDs. GET https://api-v2.short.cm/statistics/domain/:domainID/link_clicks
+     * @param {Array<number>} ids All the IDs you want to get the stats for
+     * @returns {Promise<Object>} The JSON object corresponding to the stats of the requested IDs. Format: { ID: value, ... }
+     */
     getLinksClicks(ids) {
         if (ids.length < 1) throw new Error("The provided IDs are not in an Array format");
         return new Promise((resolve, reject) => {
