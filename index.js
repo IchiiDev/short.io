@@ -9,8 +9,7 @@ class shortio {
      * @param {number} domainId [required] API Key to access user account
      * @param {String} api_key [required] Managed domain ID
      */
-    constructor(domain = "", domainId = 0, api_key = "") {
-        if (domain == "" || api_key == "" || domainId == 0) throw new Error("Invalid Class Parameters");
+    constructor(domain, domainId, api_key) {
         this.domain = domain;
         this.api_key = api_key;
         this.domainId = domainId;
@@ -216,6 +215,24 @@ class shortio {
                 });
         });
     }
+
+    getLinksClicks(ids) {
+        if (ids.length < 1) throw new Error("The provided IDs are not in an Array format");
+        return new Promise((resolve, reject) => {
+            const data = {
+                method: "GET",
+                headers: { Authorization: this.api_key }
+            }
+            fetch(`https://api-v2.short.cm/statistics/domain/${this.domainId}/link_clicks?ids=${ids.join(",")}`, data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error) reject(error);
+                    resolve(json);
+                });
+        });
+    }
+
+    
 
 }
 
