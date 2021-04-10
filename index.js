@@ -231,7 +231,7 @@ class shortio {
             fetch(`https://api-v2.short.cm/statistics/domain/${this.domainId}/link_clicks?ids=${ids.join(",")}`, data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error) reject(error);
+                    if (json.error) reject(json.error);
                     resolve(json);
                 });
         });
@@ -253,7 +253,23 @@ class shortio {
             fetch(`https://api-v2.short.cm/statistics/domain/${this.domainId}/paths?period=${period}&tzOffset=${offset}`, data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error) reject(error);
+                    if (json.error) reject(json.error);
+                    resolve(json);
+                });
+        });
+    }
+
+    getLinkStats(id, period, offset = 0) {
+        if (["today", "yesterday", "week", "month", "lastmonth", "last7", "last30", "total"].indexOf(period) < 0) throw new Error("The period is either invalid or undefined");
+        return new Promise((resolve, reject) => {
+            const data = {
+                method: "GET",
+                headers: { Authorization: this.api_key }
+            }
+            fetch(`https://api-v2.short.cm/statistics/link/${id}?period=${period}&tzOffset=${offset}`, data)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.error) reject(json.error);
                     resolve(json);
                 });
         });
