@@ -4,7 +4,7 @@ Easy to use module, made to interact with the short.io API, shorten links, delet
 [![DeepScan grade](https://deepscan.io/api/teams/10968/projects/14758/branches/281944/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10968&pid=14758&bid=281944)
 [![DeepSource](https://deepsource.io/gh/IchiiDev/short.io.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/IchiiDev/short.io/?ref=repository-badge)
 
-## How to use ?
+## How to use short.io ?
 Here's some exemple to kickstart your short.io integration, if you need documentation, refer to the [GitHub Repository's Wiki](https://github.com/IchiiDev/short.io/wiki).
 
 **IchiiDev/short.io is not affiliated to the website and enterprise [short.io](https://short.io)**
@@ -70,7 +70,7 @@ short.deleteLink(00000) // Delete the link
 Feel free to fork my work and propose changes. If you have any issues with my work, please [open an Issue](https://github.com/IchiiDev/short.io/issues).
 
 ## Contributors
-- [@IchiiDev](https://github.com/IchiiDev): `ichii@discord.fr` (Contact E-Mail).
+- [@IchiiDev](https://github.com/IchiiDev): `contact@ichiidev.xyz` (Contact E-Mail).
 
 
 ## What's new ?
@@ -85,10 +85,15 @@ Feel free to fork my work and propose changes. If you have any issues with my wo
 - Added the `getByOriginalURL()` function to get a link object by querying it's originalURL.
 - Removed useless functions parameters
 - Corrected JS Doc errors
+### `v1.3.0`: Statistics 🥳
+- Added domain, clicks and links stats methods
+- Fixed some code execution errors 
+- Removed useless constants from the code
 ## What's coming ?
-- [x] New API endpoints handling and functions
-- [ ] Add more classes to improve package ergonomics 
-- [x] Improve bulk functions
+- [ ] Add more classes to improve package ergonomics => V2 (TypeScript)
+- [ ] Global rewrite of the package in TS to improve documentation and code quality + user ergonomic => V2
+
+V2 will come directly as the next update, there wont be any 1.4.0 for domain management (Theses methods will be added along with the V2)
 
 <br/><br/>
 <p align="center"><strong><i>IchiiDev/short.io is not affiliated to the website and enterprise <a href="" target="_blank">short.io</a>.</i></strong></p>
