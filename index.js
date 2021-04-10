@@ -31,7 +31,7 @@ class shortio {
             fetch(`https://api.short.io/api/links?domain_id=${this.domainId}&offset=${offset}&limit=${limit}${(tag != "") ? "&tag=" + tag : ""}`, data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error) reject("Error: " + json.error);
+                    if (json.error) return reject("Error: " + json.error);
                     let links = new LinksCollector(json.links, json.count);
                     resolve(links);
                 });
@@ -53,7 +53,7 @@ class shortio {
             fetch(`https://api.short.io/links/expand?domain=${this.domain}&path=${path}`, data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error) reject("Error: " + json.error);
+                    if (json.error) return reject("Error: " + json.error);
                     resolve(json);
                 });
         });
@@ -73,7 +73,7 @@ class shortio {
             fetch(`https://api.short.io/links/by-original-url?domain=${this.domain}&originalURL=${originalURL}`, data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error != undefined) reject("Error: " + json.error);
+                    if (json.error != undefined) return reject("Error: " + json.error);
                     resolve(json);
                 });
         });
@@ -97,7 +97,7 @@ class shortio {
             fetch("https://api.short.io/links", data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error) reject("Error: " + json.error);
+                    if (json.error) return reject("Error: " + json.error);
                     resolve(json);
                 });
         });
@@ -121,7 +121,7 @@ class shortio {
             fetch("https://api.short.io/links/bulk", data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error != undefined) reject("Error: " + json.error);
+                    if (json.error != undefined) return reject("Error: " + json.error);
                     resolve(new LinksCollector(json, json.length));
                 });
         });
@@ -146,7 +146,7 @@ class shortio {
             fetch(`https://api.short.cm/links/${id}`, data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error != undefined) reject("Error: " + json.error);
+                    if (json.error != undefined) return reject("Error: " + json.error);
                     resolve(json);
                 });
         });
@@ -168,7 +168,7 @@ class shortio {
             fetch("https://api.short.cm/links/archive", data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error) reject(json.error);
+                    if (json.error) return reject(json.error);
                     resolve({ action: "archive", result: true });
                 });
         });
@@ -188,7 +188,7 @@ class shortio {
             fetch(`https://api.short.io/links/${link_id}`, data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error) reject(json.error);
+                    if (json.error) return reject(json.error);
                     resolve({ action: "delete", result: true });
                 });
         });
@@ -210,7 +210,7 @@ class shortio {
             fetch(`https://api-v2.short.cm/statistics/domain/${this.domainId}?period=${period}&tzOffset=${tzOffset}`, data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error) reject(json.error);
+                    if (json.error) return reject(json.error);
                     resolve(json);
                 });
         });
@@ -231,7 +231,7 @@ class shortio {
             fetch(`https://api-v2.short.cm/statistics/domain/${this.domainId}/link_clicks?ids=${ids.join(",")}`, data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error) reject(json.error);
+                    if (json.error) return reject(json.error);
                     resolve(json);
                 });
         });
@@ -253,7 +253,7 @@ class shortio {
             fetch(`https://api-v2.short.cm/statistics/domain/${this.domainId}/paths?period=${period}&tzOffset=${offset}`, data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error) reject(json.error);
+                    if (json.error) return reject(json.error);
                     resolve(json);
                 });
         });
@@ -277,7 +277,7 @@ class shortio {
             fetch(`https://api-v2.short.cm/statistics/link/${id}?period=${period}&tzOffset=${offset}`, data)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.error) reject(json.error);
+                    if (json.error) return reject(json.error);
                     resolve(json);
                 });
         });
