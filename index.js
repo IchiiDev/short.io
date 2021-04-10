@@ -240,7 +240,7 @@ class shortio {
     /**
      * This functions calls the most clicked links during the selected period. GET https://api-v2.short.cm/statistics/domain/:domainId/paths
      * @param {string} period The observed period for the stats.
-     * @param {number} tzOffset The difference between your timezone & the GMT timezone. 
+     * @param {number} offset The difference between your timezone & the GMT timezone. 
      * @returns {Object} The selected period's stats returned by the API.
      */
     getPopularPaths(period, offset = 0) {
@@ -259,6 +259,14 @@ class shortio {
         });
     }
 
+
+    /**
+     * This function gets the stats from a precise link. GET https://api-v2.short.cm/statistics/link/:linkId
+     * @param {number} id The ID of the link you want to get the stats from
+     * @param {string} period The observed period for the start
+     * @param {number} offset The difference between your timezone & the GMT timezone
+     * @returns {Promise<Object>} The returned link's stats from the API
+     */
     getLinkStats(id, period, offset = 0) {
         if (["today", "yesterday", "week", "month", "lastmonth", "last7", "last30", "total"].indexOf(period) < 0) throw new Error("The period is either invalid or undefined");
         return new Promise((resolve, reject) => {
