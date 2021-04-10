@@ -24,7 +24,7 @@ class shortio {
      */
     getLinks(limit = 150, tag = "", offset = 0) {
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: "GET",
                 headers: { accept: 'application/json', authorization: this.api_key }
             };
@@ -46,7 +46,7 @@ class shortio {
     getLink(path) {
         if (path == "") throw new Error("path is undefined")
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: 'GET',
                 headers: { accept: 'application/json', authorization: this.api_key }
             };
@@ -66,7 +66,7 @@ class shortio {
      */
     getByOriginalURL(originalURL) {
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: "GET",
                 headers: { accept: 'application/json', 'content-type': "application/json", authorization: this.api_key },
             };
@@ -88,7 +88,7 @@ class shortio {
         if (!options.originalURL) throw new Error("option.originalURL is undefined");
         options.domain = this.domain;
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: "POST",
                 headers: { accept: 'application/json', 'content-type': "application/json", authorization: this.api_key },
                 body: JSON.stringify(options),
@@ -112,7 +112,7 @@ class shortio {
         if (links.length < 2) throw new Error("Cannot send less than two links, please use the createLink method");
         if (links.length > 1000) throw new Error("Cannot send more than one thousand links, please split your link array");
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: "POST",
                 headers: { accept: 'application/json', 'content-type': "application/json", authorization: this.api_key },
                 body: JSON.stringify({ domain: this.domain, links: links }),
@@ -137,7 +137,7 @@ class shortio {
         if (!linkObject.originalURL) throw new Error("originalURL is not defined");
         linkObject.domain = this.domain;
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: "POST",
                 headers: { accept: 'application/json', 'content-type': "application/json", authorization: this.api_key },
                 body: JSON.stringify(linkObject),
@@ -159,7 +159,7 @@ class shortio {
      */
     archiveLink(link_id) {
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: 'POST',
                 headers: { 'content-type': "application/json", authorization: this.api_key },
                 body: JSON.stringify({ link_id: link_id }),
@@ -181,7 +181,7 @@ class shortio {
      */
     deleteLink(link_id) {
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: 'DELETE',
                 headers: { 'content-type': "application/json", authorization: this.api_key }
             };
@@ -203,7 +203,7 @@ class shortio {
     getDomainStats(period = "", tzOffset = 0) {
         if (["today", "yesterday", "week", "month", "lastmonth", "last7", "last30", "total"].indexOf(period) < 0) throw new Error("The period is either invalid or undefined");
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: "GET",
                 headers: { 'content-type': "application/json", authorization: this.api_key }
             }
@@ -224,7 +224,7 @@ class shortio {
     getLinksClicks(ids) {
         if (ids.length < 1) throw new Error("The provided IDs are not in an Array format");
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: "GET",
                 headers: { Authorization: this.api_key }
             }
@@ -246,7 +246,7 @@ class shortio {
     getPopularPaths(period, offset = 0) {
         if (["today", "yesterday", "week", "month", "lastmonth", "last7", "last30", "total"].indexOf(period) < 0) throw new Error("The period is either invalid or undefined");
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: "GET",
                 headers: { Authorization: this.api_key }
             }
@@ -270,7 +270,7 @@ class shortio {
     getLinkStats(id, period, offset = 0) {
         if (["today", "yesterday", "week", "month", "lastmonth", "last7", "last30", "total"].indexOf(period) < 0) throw new Error("The period is either invalid or undefined");
         return new Promise((resolve, reject) => {
-            const data = {
+            let data = {
                 method: "GET",
                 headers: { Authorization: this.api_key }
             }
