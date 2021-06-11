@@ -5,7 +5,7 @@ Easy to use module, made to interact with the short.io API, shorten links, delet
 [![DeepSource](https://deepsource.io/gh/IchiiDev/short.io.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/IchiiDev/short.io/?ref=repository-badge)
 
 ## How to use short.io ?
-Here's some exemple to kickstart your short.io integration, if you need documentation, refer to the [GitHub Repository's Wiki](https://github.com/IchiiDev/short.io/wiki).
+Here's some exemple to kickstart your short.io integration, if you need documentation, refer to the [GitHub Repository's Wiki](https://github.com/IchiiDev/short.io/wiki). ⚠️ *Outdated, a custom documentation website will come.*
 
 **IchiiDev/short.io is not affiliated to the website and enterprise [short.io](https://short.io)**
 
