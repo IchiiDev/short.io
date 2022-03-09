@@ -1,8 +1,14 @@
 # Node.JS Packages
 /node_modules
 
-# Dev test file
-test.js
+# Dev test files
+/tests
 
 # Node.JS Package Lock File
 package-lock.json
+
+# TS Utils
+/dist
+
+# TGZ Files
+*.tgz
